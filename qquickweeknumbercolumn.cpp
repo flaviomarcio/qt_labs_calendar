@@ -235,10 +235,21 @@ void QQuickWeekNumberColumn::componentComplete()
     d->resizeItems();
 }
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
 void QQuickWeekNumberColumn::geometryChanged(const QRectF &newGeometry, const QRectF &oldGeometry)
+#else
+void QQuickWeekNumberColumn::geometryChange(const QRectF &newGeometry, const QRectF &oldGeometry)
+#endif
 {
+    Q_UNUSED(newGeometry)
+    Q_UNUSED(oldGeometry)
+
     Q_D(QQuickWeekNumberColumn);
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
     QQuickControl::geometryChanged(newGeometry, oldGeometry);
+#else
+    QQuickControl::geometryChange(newGeometry, oldGeometry);
+#endif
     if (isComponentComplete())
         d->resizeItems();
 }

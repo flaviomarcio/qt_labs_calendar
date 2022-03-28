@@ -406,10 +406,20 @@ void QQuickMonthGrid::componentComplete()
     d->resizeItems();
 }
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
 void QQuickMonthGrid::geometryChanged(const QRectF &newGeometry, const QRectF &oldGeometry)
+#else
+void QQuickMonthGrid::geometryChange(const QRectF &newGeometry, const QRectF &oldGeometry)
+#endif
 {
+    Q_UNUSED(newGeometry)
+    Q_UNUSED(oldGeometry)
     Q_D(QQuickMonthGrid);
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
     QQuickControl::geometryChanged(newGeometry, oldGeometry);
+#else
+    QQuickControl::geometryChange(newGeometry, oldGeometry);
+#endif
     if (isComponentComplete())
         d->resizeItems();
 }

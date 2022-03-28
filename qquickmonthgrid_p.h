@@ -96,7 +96,11 @@ Q_SIGNALS:
 
 protected:
     void componentComplete() override;
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
     void geometryChanged(const QRectF &newGeometry, const QRectF &oldGeometry) override;
+#else
+    void geometryChange(const QRectF &newGeometry, const QRectF &oldGeometry) override;
+#endif
     void localeChange(const QLocale &newLocale, const QLocale &oldLocale) override;
     void paddingChange(const QMarginsF &newPadding, const QMarginsF &oldPadding) override;
     void updatePolish() override;
